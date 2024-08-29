@@ -1,0 +1,29 @@
+@mixin button-styles(
+  $background,
+  $box-sw,
+  $active-background,
+  $hover-background,
+  $disabled-background
+) {
+  background-color: $background;
+  box-shadow: $box-sw;
+  transition: background-color 0.4s ease;
+
+  &:hover {
+    background: $hover-background;
+    transition: background 0.4s ease;
+  }
+
+  &:focus-visible {
+    background: $background;
+    outline: 2px solid var(--color-info-700);
+  }
+
+  &:active {
+    background: $active-background;
+  }
+
+  &:disabled {
+    background: $disabled-background;
+  }
+}

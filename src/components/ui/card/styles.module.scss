@@ -1,0 +1,9 @@
+@import "src/assets/styles/colors";
+
+.card {
+  width: 100%;
+  padding: 24px 24px;
+  border: 1px solid #313131;
+  background-color: var(--color-dark-700);
+  box-shadow: -1px -1px 2px 0px #0000001A;
+}

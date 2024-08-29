@@ -1,0 +1,80 @@
+.pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: black;
+  color: white;
+
+  .blockSelector {
+    margin-left: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .selector {
+      position: relative;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+
+      box-sizing: border-box;
+      min-width: 50px;
+      max-width: 50px;
+      height: 24px;
+      padding: 0 6px;
+
+      color: var(--color-light-100);
+
+      background: var(--color-dark-700);
+      border: 1px solid var(--color-dark-500);
+      border-radius: 1px;
+    }
+  }
+}
+
+.button {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+
+  background-color: transparent;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+
+  &:hover {
+    background-color: #333;
+    color: #fff;
+  }
+}
+
+.active {
+  background-color: #ffffff;
+  color: #000;
+}
+
+.buttonArrow {
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+
+  svg {
+    color: #fff;
+
+    &:hover {
+      color: #808080;
+    }
+  }
+}
+
+.button, .buttonArrow svg {
+  transition: ease-in-out .2s;
+}
+
+.dots {
+  cursor: default;
+}
+

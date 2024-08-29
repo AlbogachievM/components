@@ -1,0 +1,243 @@
+:root {
+  .containerApp {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: 1008px;
+    height: 100%;
+    margin: 0 auto;
+    @media (max-width: 550px) {
+      padding: 0 4.211%;
+    }
+  }
+
+  //ANIMATION ---------------------------------------------------------------------
+  .iconLogOutAnimation {
+    &:hover svg path:last-child {
+      animation: active-logout 0.8s forwards 0s;
+    }
+
+    &:not(:hover) svg path:last-child {
+      animation: inactive-logout 0.4s forwards;
+    }
+  }
+
+  .iconProfileAnimation {
+    &:hover div svg path:first-child {
+      animation: active-profile 1s forwards 0s;
+    }
+
+    &:not(:hover) div svg path:first-child {
+      animation: inactive-profile 0.4s forwards;
+    }
+  }
+
+  .editAnimation {
+    &:hover div svg path:last-child {
+      animation: edit-setting-hover 0.6s ease forwards;
+    }
+
+    &:not(:hover) div svg path:last-child {
+      animation: edit-setting-unhover 0.5s forwards;
+    }
+  }
+
+  .deleteAnimation {
+    &:hover svg path:last-child {
+      animation: delete-hover 0.6s ease forwards;
+    }
+
+    &:not(:hover) svg path:last-child {
+      animation: delete-not-hover 0.3s forwards;
+    }
+  }
+
+  .learnAnimation {
+    &:hover div svg path:last-child {
+      transform-origin: center;
+
+      animation: learn-hover 0.5s ease forwards;
+    }
+
+    &:not(:hover) div svg path:last-child {
+      transform-origin: center;
+
+      animation: learn-hot-hover 1s forwards;
+    }
+  }
+
+  .notFileAnimation {
+    &:hover div svg path {
+      transform-origin: center;
+
+      animation: notFile-hover 0.5s ease forwards;
+    }
+
+    &:not(:hover) div svg path:last-child {
+      transform-origin: center;
+      animation: learn-hot-hover 1s forwards;
+    }
+  }
+}
+
+@keyframes active-logout {
+  0% {
+    transform: translateX(2px);
+  }
+
+  50% {
+    transform: translateX(-4px);
+    fill: var(--color-light-100);
+  }
+  100% {
+    fill: var(--color-primary-500);
+  }
+}
+
+@keyframes inactive-logout {
+  0% {
+    transform: translateX(-4px);
+  }
+
+  50% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes active-profile {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0px);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-3px);
+    fill: var(--color-light-100);
+  }
+  100% {
+    transform: translateY(0px);
+    fill: var(--color-primary-500);
+  }
+}
+
+@keyframes inactive-profile {
+  0% {
+    transform: translateY(-4px);
+  }
+
+  50% {
+    transform: translateY(2px);
+  }
+}
+
+@keyframes edit-setting-hover {
+  0% {
+    transform: translate(0, 0) rotate(3deg);
+  }
+
+  50% {
+    transform: translate(4px, 0) rotate(-4deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(0);
+    fill: var(--color-primary-500);
+  }
+}
+
+@keyframes edit-setting-unhover {
+  0% {
+    transform: translate(0, 0) rotate(0);
+  }
+
+  50% {
+    transform: translate(4px, 0) rotate(-4deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+@keyframes delete-hover {
+  0% {
+    transform: translateY(0);
+    fill: var(--color-light-100);
+  }
+  20% {
+    transform: translateY(-2px);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(-1px);
+  }
+  80% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+    fill: var(--color-danger-700);
+  }
+}
+
+@keyframes delete-not-hover {
+  0% {
+    fill: var(--color-danger-700);
+    transform: translateY(-1px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes learn-hover {
+  0% {
+    transform: rotate(0);
+    fill: var(--color-light-100);
+  }
+  50% {
+    transform: rotate(0deg);
+    fill: var(--color-light-100);
+  }
+  100% {
+    transform: rotate(360deg);
+    fill: var(--color-primary-500);
+  }
+}
+
+@keyframes learn-hot-hover {
+  0% {
+    transform: rotate(-360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+    fill: var(--color-light-100);
+  }
+}
+
+@keyframes notFile-hover {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.8);
+  }
+
+  70% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
