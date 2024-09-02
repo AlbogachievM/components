@@ -2,6 +2,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import s from './styles.module.scss';
 import {Icon} from "../icon/icon.tsx";
 import {Fragment} from "react";
+import {DynamicMenuItem, IconProps} from "./dynamicMenuItem/DynamicMenuItem.tsx";
 
 
 interface Trigger {
@@ -11,54 +12,51 @@ interface Trigger {
 
 interface BaseItemSetting {
     title: string
-    icon: 'logOut' | 'more' | 'profile'
+    icon: IconProps
     disabled?: boolean
 }
 
 interface LinkItemSetting extends BaseItemSetting {
-    href: string; // Обязательный href для ссылок
-    onClick?: never; // Не может быть onClick для ссылок
+    route: string;
+    callback?: never;
 }
 
 interface ButtonItemSetting extends BaseItemSetting {
-    onClick: () => void; // Обязательный onClick для кнопок
-    href?: never; // Не может быть href для кнопок
+    callback: () => void;
+    route?: never;
 }
 
-type ItemSetting = LinkItemSetting | ButtonItemSetting;
+export type ItemSetting = LinkItemSetting | ButtonItemSetting;
 
 
-interface Profile {
+export type Profile = {
     userName: string
     email?: string
     img?: string
-    onClick?: () => void
+    callback?: () => void
 }
 
-type BaseProps = {
+type Props = {
     isArrow?: boolean
     trigger: Trigger;
+    profile?: Profile
     items: ItemSetting[]
 }
 
-type Props = (BaseProps & { mode: 'profile', profile: Profile }) | (BaseProps & { mode: 'default' })
 
-export const DropDownMenu = (props: Props) => {
-    const {mode, trigger, isArrow, items} = props
-
+const DropDownMenu = (props: Props) => {
+    const {profile, trigger, isArrow, items} = props
     const itemList = items.map((el, i) => {
-        const ItemComponent = el.href ? 'a' : 'button';
-        const itemProps = el.href
-            ? {href: el.href || '#', className: s.link}
-            : {onClick: el.onClick, className: s.button};
-
         return (
             <Fragment key={i}>
                 <DropdownMenu.Item className={s.Item} asChild>
-                    <ItemComponent {...itemProps}>
-                        <Icon iconId={el.icon}/>
-                        <span>{el.title}</span>
-                    </ItemComponent>
+                    <DynamicMenuItem
+                        title={el.title}
+                        icon={el.icon}
+                        type={el.route ? 'a' : 'button'}
+                        callback={el.callback || (() => {})}
+                        route={el.route || ''}
+                    />
                 </DropdownMenu.Item>
                 {i < items.length - 1 && <DropdownMenu.Separator className={s.Separator}/>}
             </Fragment>
@@ -69,22 +67,22 @@ export const DropDownMenu = (props: Props) => {
         <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
                 <button className={s.triggerButton} aria-label="Customise options">
-                    {trigger.icon && <Icon iconId={trigger.icon}/>}
+                    {trigger.icon && <Icon iconId={trigger.icon} width="24" height="24" viewBox="0 0 24 24"/>}
                     {trigger.img && <img src={trigger.img} alt={trigger.img}/>}
                 </button>
             </DropdownMenu.Trigger>
 
             <DropdownMenu.Portal>
-                <DropdownMenu.Content className={s.Content} sideOffset={5}>
-                    {!isArrow && <DropdownMenu.Arrow className={s.Arrow}/>}
-                    {mode === 'profile' &&
+                <DropdownMenu.Content className={s.Content} sideOffset={10} align={'end'} alignOffset={-6} style={profile && {marginTop: '4px'}}>
+                    {isArrow && <DropdownMenu.Arrow className={s.Arrow} />}
+                    {profile &&
                         <>
                             <DropdownMenu.Item className={s.Item}>
-                                <div className={s.profile}>
-                                    <img src={props.profile.img} alt={props.profile.img}/>
+                                <div className={s.profile} onClick={profile.callback}>
+                                    <img src={profile.img} alt={profile.img}/>
                                     <div>
-                                        <span className={s.userName}>{props.profile.userName}</span>
-                                        <span className={s.userEmail}>{props.profile.email}</span>
+                                        <span className={s.userName}>{profile.userName}</span>
+                                        <span className={s.userEmail}>{profile.email}</span>
                                     </div>
                                 </div>
                             </DropdownMenu.Item>
@@ -92,10 +90,11 @@ export const DropDownMenu = (props: Props) => {
                             {itemList}
                         </>
                     }
-                    {mode === 'default' && <> {itemList}</>}
-
+                    {!profile && <> {itemList}</>}
                 </DropdownMenu.Content>
             </DropdownMenu.Portal>
         </DropdownMenu.Root>
     );
 };
+
+export default DropDownMenu;

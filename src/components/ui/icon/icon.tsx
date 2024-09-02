@@ -1,13 +1,5 @@
 import iconsSprite from '../../../assets/images/icons-sprite.svg'
 
-export type IconId = 'arrow-pagination-left'
-    | 'arrow-pagination-right'
-    | 'arrow-select-up'
-    | 'arrow-select-down'
-    | 'logOut'
-    | 'more'
-    | 'profile'
-
 interface Props {
     iconId: IconId;
     width?: string;
@@ -15,6 +7,18 @@ interface Props {
     viewBox?: string;
     fill?: string;
 }
+
+
+export type IconId = 'arrow-pagination-left'
+    | 'arrow-pagination-right'
+    | 'arrow-select-up'
+    | 'arrow-select-down'
+    | 'more'
+    | 'logOut'
+    | 'profile'
+    | 'play'
+    | 'trash'
+    | 'edit'
 
 
 export const Icon: React.FC<Props> = (props: Props) => {

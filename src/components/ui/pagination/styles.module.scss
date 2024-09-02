@@ -2,8 +2,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  background-color: black;
-  color: white;
+  color: var(--color-light-100);
 
   .blockSelector {
     margin-left: 12px;
@@ -39,19 +38,19 @@
   height: 24px;
 
   background-color: transparent;
-  color: #fff;
+  color: var(--color-light-100);
   text-align: center;
   font-size: 14px;
   font-weight: 400;
 
   &:hover {
     background-color: #333;
-    color: #fff;
+    color: var(--color-light-100);
   }
 }
 
 .active {
-  background-color: #ffffff;
+  background-color: var(--color-light-100);
   color: #000;
 }
 
@@ -62,7 +61,7 @@
   background-color: transparent;
 
   svg {
-    color: #fff;
+    color: var(--color-light-100);
 
     &:hover {
       color: #808080;
@@ -72,7 +71,13 @@
 
 .button, .buttonArrow svg {
   transition: ease-in-out .2s;
+
+  &:focus {
+    outline: 2px solid var(--color-info-900);
+    border-radius: 2px;
+  }
 }
+
 
 .dots {
   cursor: default;
